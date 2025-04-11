@@ -50,7 +50,8 @@
             {% if results.is_square %}
             <div class="result-section">
                 <h3>行列式</h3>
-                <div class="math-display">\[ {{ latex(results.det) }} \]</div>
+                <!-- 去掉 latex 函数调用 -->
+                <div class="math-display">\[ {{ results.det }} \]</div>
             </div>
 
             <div class="result-section">

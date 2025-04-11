@@ -3,4 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="FlaskProject" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="FlaskProject" project-jdk-type="Python SDK" />
 </project>

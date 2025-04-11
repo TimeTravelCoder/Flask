@@ -44,7 +44,8 @@ def index():
             results['rank'] = mat.rank()
             results['is_square'] = mat.is_square
             if mat.is_square:
-                results['det'] = mat.det()
+                # 直接将行列式转换为 LaTeX 格式
+                results['det'] = latex(mat.det())
                 results['charpoly'] = latex(mat.charpoly().as_expr())
                 try:
                     eigen = mat.eigenvects()
