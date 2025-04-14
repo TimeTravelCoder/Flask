@@ -80,18 +80,17 @@
             <div class="error">特征值计算错误: {{ results.eigen_error }}</div>
             {% endif %}
 
-            {% if results.spectral_decomposition %}
+            {% if results.inv %}
             <div class="result-section">
-                <h3><i class="fa-solid fa-split"></i> 谱分解</h3>
-                <p>\( A = PDP^{-1} \)</p>
-                <div class="math-display">\[ P = {{ results.spectral_decomposition.P }} \]</div>
-                <div class="math-display">\[ D = {{ results.spectral_decomposition.D }} \]</div>
-                <div class="math-display">\[ P^{-1} = {{ results.spectral_decomposition.P_inv }} \]</div>
+                <h3><i class="fa-solid fa-undo"></i> 矩阵的逆</h3>
+                <div class="math-display">\[ {{ results.inv }} \]</div>
             </div>
+            {% elif results.inv_error %}
+            <div class="error">矩阵求逆错误: {{ results.inv_error }}</div>
             {% endif %}
 
             {% else %}
-            <p class="info">非方阵无法计算行列式和特征值</p>
+            <p class="info">非方阵无法计算行列式、特征值和逆矩阵</p>
             {% endif %}
         </div>
         {% endif %}

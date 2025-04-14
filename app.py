@@ -60,20 +60,18 @@ def index():
                             'vectors': [latex(vec.normalized()) for vec in vectors]
                         } for val, mult, vectors in eigen
                     ]
-
-                    # 谱分解
-                    P = Matrix.hstack(*[vec for _, _, vecs in eigen for vec in vecs])
-                    D = Matrix.diag(*[val for val, mult, _ in eigen for _ in range(mult)])
-                    P_inv = P.inv()
-                    results['spectral_decomposition'] = {
-                        'P': latex(P),
-                        'D': latex(D),
-                        'P_inv': latex(P_inv)
-                    }
                 except Exception as e:
                     results['eigen_error'] = str(e)
+
+                # 计算矩阵的逆
+                try:
+                    inv = mat.inv()
+                    results['inv'] = latex(inv)
+                except Exception as e:
+                    results['inv_error'] = str(e)
             else:
                 results['det'] = None
+                results['inv'] = None
 
             # 计算RREF并转为LaTeX
             rref = mat.rref()[0]
