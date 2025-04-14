@@ -48,17 +48,6 @@
             </div>
 
             <div class="result-section">
-                <h3><i class="fa-solid fa-arrow-rotate-left"></i> 矩阵的逆</h3>
-                {% if results.inverse %}
-                <div class="math-display">\[ {{ results.inverse }} \]</div>
-                {% elif results.inverse_error %}
-                <div class="error">矩阵求逆错误: {{ results.inverse_error }}</div>
-                {% else %}
-                <p class="info">非方阵或奇异矩阵无法求逆</p>
-                {% endif %}
-            </div>
-
-            <div class="result-section">
                 <h3><i class="fa-solid fa-ranking-star"></i> 矩阵秩</h3>
                 <p>{{ results.rank }}</p>
             </div>
@@ -89,6 +78,16 @@
             </div>
             {% elif results.eigen_error %}
             <div class="error">特征值计算错误: {{ results.eigen_error }}</div>
+            {% endif %}
+
+            {% if results.spectral_decomposition %}
+            <div class="result-section">
+                <h3><i class="fa-solid fa-split"></i> 谱分解</h3>
+                <p>\( A = PDP^{-1} \)</p>
+                <div class="math-display">\[ P = {{ results.spectral_decomposition.P }} \]</div>
+                <div class="math-display">\[ D = {{ results.spectral_decomposition.D }} \]</div>
+                <div class="math-display">\[ P^{-1} = {{ results.spectral_decomposition.P_inv }} \]</div>
+            </div>
             {% endif %}
 
             {% else %}
