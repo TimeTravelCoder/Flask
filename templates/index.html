@@ -48,6 +48,17 @@
             </div>
 
             <div class="result-section">
+                <h3><i class="fa-solid fa-arrow-rotate-left"></i> 矩阵的逆</h3>
+                {% if results.inverse %}
+                <div class="math-display">\[ {{ results.inverse }} \]</div>
+                {% elif results.inverse_error %}
+                <div class="error">矩阵求逆错误: {{ results.inverse_error }}</div>
+                {% else %}
+                <p class="info">非方阵或奇异矩阵无法求逆</p>
+                {% endif %}
+            </div>
+
+            <div class="result-section">
                 <h3><i class="fa-solid fa-ranking-star"></i> 矩阵秩</h3>
                 <p>{{ results.rank }}</p>
             </div>

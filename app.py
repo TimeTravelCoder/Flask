@@ -62,8 +62,14 @@ def index():
                     ]
                 except Exception as e:
                     results['eigen_error'] = str(e)
+                try:
+                    # 计算矩阵的逆并转换为 LaTeX 格式
+                    results['inverse'] = latex(mat.inv())
+                except Exception as e:
+                    results['inverse_error'] = str(e)
             else:
                 results['det'] = None
+                results['inverse'] = None
 
             # 计算RREF并转为LaTeX
             rref = mat.rref()[0]
