@@ -47,6 +47,15 @@
                 <div class="math-display">\[ {{ results.rref }} \]</div>
             </div>
 
+            {% if results.inv %}
+            <div class="result-section">
+                <h3><i class="fa-solid fa-undo"></i> 矩阵的逆</h3>
+                <div class="math-display">\[ {{ results.inv }} \]</div>
+            </div>
+            {% elif results.inv_error %}
+            <div class="error">矩阵求逆错误: {{ results.inv_error }}</div>
+            {% endif %}
+
             <div class="result-section">
                 <h3><i class="fa-solid fa-ranking-star"></i> 矩阵秩</h3>
                 <p>{{ results.rank }}</p>
@@ -80,17 +89,28 @@
             <div class="error">特征值计算错误: {{ results.eigen_error }}</div>
             {% endif %}
 
-            {% if results.inv %}
+            {% if results.spectral_P and results.spectral_D %}
             <div class="result-section">
-                <h3><i class="fa-solid fa-undo"></i> 矩阵的逆</h3>
-                <div class="math-display">\[ {{ results.inv }} \]</div>
+                <h3><i class="fa-solid fa-split"></i> 谱分解</h3>
+                <p>\( P = \) <div class="math-display">\[ {{ results.spectral_P }} \]</div></p>
+                <p>\( D = \) <div class="math-display">\[ {{ results.spectral_D }} \]</div></p>
             </div>
-            {% elif results.inv_error %}
-            <div class="error">矩阵求逆错误: {{ results.inv_error }}</div>
+            {% elif results.spectral_error %}
+            <div class="error">谱分解错误: {{ results.spectral_error }}</div>
+            {% endif %}
+
+            {% if results.LU_L and results.LU_U %}
+            <div class="result-section">
+                <h3><i class="fa-solid fa-layer-group"></i> LU 分解</h3>
+                <p>\( L = \) <div class="math-display">\[ {{ results.LU_L }} \]</div></p>
+                <p>\( U = \) <div class="math-display">\[ {{ results.LU_U }} \]</div></p>
+            </div>
+            {% elif results.LU_error %}
+            <div class="error">LU 分解错误: {{ results.LU_error }}</div>
             {% endif %}
 
             {% else %}
-            <p class="info">非方阵无法计算行列式、特征值和逆矩阵</p>
+            <p class="info">非方阵无法计算行列式、特征值、逆矩阵、谱分解和 LU 分解</p>
             {% endif %}
         </div>
         {% endif %}

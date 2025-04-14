@@ -69,11 +69,31 @@ def index():
                     results['inv'] = latex(inv)
                 except Exception as e:
                     results['inv_error'] = str(e)
+
+                # 谱分解（假设矩阵可对角化）
+                try:
+                    P, D = mat.diagonalize()
+                    results['spectral_P'] = latex(P)
+                    results['spectral_D'] = latex(D)
+                except Exception as e:
+                    results['spectral_error'] = str(e)
+
+                # LU 分解
+                try:
+                    L, U, _ = mat.LUdecomposition()
+                    results['LU_L'] = latex(L)
+                    results['LU_U'] = latex(U)
+                except Exception as e:
+                    results['LU_error'] = str(e)
             else:
                 results['det'] = None
                 results['inv'] = None
+                results['spectral_P'] = None
+                results['spectral_D'] = None
+                results['LU_L'] = None
+                results['LU_U'] = None
 
-            # 计算RREF并转为LaTeX
+            # 计算 RREF 并转为 LaTeX
             rref = mat.rref()[0]
             results['rref'] = latex(rref)
             results['original'] = latex(mat)
