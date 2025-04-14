@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>矩阵计算器</title>
     <link rel="stylesheet" href="/static/style.css">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>在线矩阵计算器</h1>
+        <!-- 在标题旁边添加图标 -->
+        <h1><i class="fa-solid fa-calculator"></i> 在线矩阵计算器</h1>
 
         {% if error %}
         <div class="error">{{ error|safe }}</div>
@@ -20,48 +23,50 @@
             <div class="input-group">
                 <label>行数(m): <input type="number" name="rows" min="1" value="{{ request.form.rows or 2 }}" required></label>
                 <label>列数(n): <input type="number" name="cols" min="1" value="{{ request.form.cols or 2 }}" required></label>
-                <button type="button" onclick="createMatrixInputs()">生成矩阵输入</button>
+                <!-- 在按钮上添加图标 -->
+                <button type="button" onclick="createMatrixInputs()"><i class="fa-solid fa-table-cells"></i> 生成矩阵输入</button>
             </div>
 
             <div id="matrixInput"></div>
 
-            <button type="submit">计算</button>
+            <!-- 在按钮上添加图标 -->
+            <button type="submit"><i class="fa-solid fa-calculator"></i> 计算</button>
         </form>
 
         {% if results %}
         <div class="results">
-            <h2>计算结果</h2>
+            <h2><i class="fa-solid fa-clipboard-list"></i> 计算结果</h2>
 
             <div class="result-section">
-                <h3>原始矩阵</h3>
+                <h3><i class="fa-solid fa-matrix"></i> 原始矩阵</h3>
                 <div class="math-display">\[ {{ results.original }} \]</div>
             </div>
 
             <div class="result-section">
-                <h3>行简化阶梯形(RREF)</h3>
+                <h3><i class="fa-solid fa-matrix"></i> 行简化阶梯形(RREF)</h3>
                 <div class="math-display">\[ {{ results.rref }} \]</div>
             </div>
 
             <div class="result-section">
-                <h3>矩阵秩</h3>
+                <h3><i class="fa-solid fa-ranking-star"></i> 矩阵秩</h3>
                 <p>{{ results.rank }}</p>
             </div>
 
             {% if results.is_square %}
             <div class="result-section">
-                <h3>行列式</h3>
+                <h3><i class="fa-solid fa-calculator"></i> 行列式</h3>
                 <!-- 去掉 latex 函数调用 -->
                 <div class="math-display">\[ {{ results.det }} \]</div>
             </div>
 
             <div class="result-section">
-                <h3>特征多项式</h3>
+                <h3><i class="fa-solid fa-polynomial"></i> 特征多项式</h3>
                 <div class="math-display">\[ {{ results.charpoly }} = 0 \]</div>
             </div>
 
             {% if results.eigen %}
             <div class="result-section">
-                <h3>特征值与特征向量</h3>
+                <h3><i class="fa-solid fa-arrow-up-right-dots"></i> 特征值与特征向量</h3>
                 {% for eigen in results.eigen %}
                 <div class="eigen-group">
                     <p>特征值: \( {{ eigen.value }} \) (代数重数: {{ eigen.multiplicity }})</p>
